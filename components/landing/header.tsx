@@ -6,19 +6,18 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 
-export default function Header() {
+export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <Image src="/images/nexarion-logo.png" alt="NexarionAI" width={32} height={32} className="rounded-lg" />
-            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              NexarionAI
-            </span>
-          </div>
+          {/* Logo */}
+          <Link href="/" className="flex items-center space-x-2">
+            <Image src="/images/nexarion-logo.png" alt="NexarionAI" width={32} height={32} className="h-8 w-8" />
+            <span className="text-xl font-bold text-gray-900">NexarionAI</span>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
@@ -31,43 +30,72 @@ export default function Header() {
             <Link href="#testimonials" className="text-gray-600 hover:text-gray-900 transition-colors">
               Testimonials
             </Link>
-            <Link href="/auth/login" className="text-gray-600 hover:text-gray-900 transition-colors">
-              Login
+            <Link href="#contact" className="text-gray-600 hover:text-gray-900 transition-colors">
+              Contact
             </Link>
-            <Button
-              asChild
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
-            >
-              <Link href="/auth/sign-up">Get Started</Link>
-            </Button>
           </nav>
 
-          {/* Mobile menu button */}
-          <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {/* Desktop CTA */}
+          <div className="hidden md:flex items-center space-x-4">
+            <Link href="/auth/login">
+              <Button variant="ghost" className="text-gray-600 hover:text-gray-900">
+                Sign In
+              </Button>
+            </Link>
+            <Link href="/auth/sign-up">
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white">Start Free Trial</Button>
+            </Link>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
+            {isMenuOpen ? <X className="h-6 w-6 text-gray-600" /> : <Menu className="h-6 w-6 text-gray-600" />}
           </button>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
-              <Link href="#features" className="block px-3 py-2 text-gray-600 hover:text-gray-900">
+          <div className="md:hidden py-4 border-t">
+            <nav className="flex flex-col space-y-4">
+              <Link
+                href="#features"
+                className="text-gray-600 hover:text-gray-900 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 Features
               </Link>
-              <Link href="#pricing" className="block px-3 py-2 text-gray-600 hover:text-gray-900">
+              <Link
+                href="#pricing"
+                className="text-gray-600 hover:text-gray-900 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 Pricing
               </Link>
-              <Link href="#testimonials" className="block px-3 py-2 text-gray-600 hover:text-gray-900">
+              <Link
+                href="#testimonials"
+                className="text-gray-600 hover:text-gray-900 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 Testimonials
               </Link>
-              <Link href="/auth/login" className="block px-3 py-2 text-gray-600 hover:text-gray-900">
-                Login
+              <Link
+                href="#contact"
+                className="text-gray-600 hover:text-gray-900 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contact
               </Link>
-              <Button asChild className="w-full mt-2 bg-gradient-to-r from-blue-600 to-purple-600">
-                <Link href="/auth/sign-up">Get Started</Link>
-              </Button>
-            </div>
+              <div className="flex flex-col space-y-2 pt-4 border-t">
+                <Link href="/auth/login" onClick={() => setIsMenuOpen(false)}>
+                  <Button variant="ghost" className="w-full justify-start">
+                    Sign In
+                  </Button>
+                </Link>
+                <Link href="/auth/sign-up" onClick={() => setIsMenuOpen(false)}>
+                  <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">Start Free Trial</Button>
+                </Link>
+              </div>
+            </nav>
           </div>
         )}
       </div>
