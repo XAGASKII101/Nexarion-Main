@@ -6,92 +6,68 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 
-export function Header() {
+export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
+    <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <Image src="/images/nexarion-logo.png" alt="NexarionAI" width={32} height={32} className="rounded-full" />
-            <span className="text-xl font-bold text-white">NexarionAI</span>
-          </Link>
+        <div className="flex h-16 items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <Image src="/images/nexarion-logo.png" alt="NexarionAI" width={32} height={32} className="rounded-lg" />
+            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              NexarionAI
+            </span>
+          </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link href="#features" className="text-slate-300 hover:text-white transition-colors">
+            <Link href="#features" className="text-gray-600 hover:text-gray-900 transition-colors">
               Features
             </Link>
-            <Link href="#how-it-works" className="text-slate-300 hover:text-white transition-colors">
-              How it Works
-            </Link>
-            <Link href="#pricing" className="text-slate-300 hover:text-white transition-colors">
+            <Link href="#pricing" className="text-gray-600 hover:text-gray-900 transition-colors">
               Pricing
             </Link>
-            <Link href="#testimonials" className="text-slate-300 hover:text-white transition-colors">
+            <Link href="#testimonials" className="text-gray-600 hover:text-gray-900 transition-colors">
               Testimonials
             </Link>
+            <Link href="/auth/login" className="text-gray-600 hover:text-gray-900 transition-colors">
+              Login
+            </Link>
+            <Button
+              asChild
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+            >
+              <Link href="/auth/sign-up">Get Started</Link>
+            </Button>
           </nav>
 
-          {/* Desktop CTA */}
-          <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" asChild>
-              <Link href="/auth/login">Sign In</Link>
-            </Button>
-            <Button asChild>
-              <Link href="/auth/sign-up">Start Free Trial</Link>
-            </Button>
-          </div>
-
           {/* Mobile menu button */}
-          <button className="md:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-slate-800">
-            <nav className="flex flex-col space-y-4">
-              <Link
-                href="#features"
-                className="text-slate-300 hover:text-white transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
+          <div className="md:hidden">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+              <Link href="#features" className="block px-3 py-2 text-gray-600 hover:text-gray-900">
                 Features
               </Link>
-              <Link
-                href="#how-it-works"
-                className="text-slate-300 hover:text-white transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                How it Works
-              </Link>
-              <Link
-                href="#pricing"
-                className="text-slate-300 hover:text-white transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
+              <Link href="#pricing" className="block px-3 py-2 text-gray-600 hover:text-gray-900">
                 Pricing
               </Link>
-              <Link
-                href="#testimonials"
-                className="text-slate-300 hover:text-white transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
+              <Link href="#testimonials" className="block px-3 py-2 text-gray-600 hover:text-gray-900">
                 Testimonials
               </Link>
-              <div className="flex flex-col space-y-2 pt-4 border-t border-slate-800">
-                <Button variant="ghost" asChild>
-                  <Link href="/auth/login">Sign In</Link>
-                </Button>
-                <Button asChild>
-                  <Link href="/auth/sign-up">Start Free Trial</Link>
-                </Button>
-              </div>
-            </nav>
+              <Link href="/auth/login" className="block px-3 py-2 text-gray-600 hover:text-gray-900">
+                Login
+              </Link>
+              <Button asChild className="w-full mt-2 bg-gradient-to-r from-blue-600 to-purple-600">
+                <Link href="/auth/sign-up">Get Started</Link>
+              </Button>
+            </div>
           </div>
         )}
       </div>
