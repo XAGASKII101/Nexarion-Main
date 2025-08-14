@@ -3,7 +3,7 @@ import { stripe } from "@/lib/stripe"
 import { createClient } from "@/lib/supabase/server"
 import type Stripe from "stripe"
 
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!
+const webhookSecret =`sk${process.env.STRIPE_KEY}`!
 
 export async function POST(req: NextRequest) {
   try {
