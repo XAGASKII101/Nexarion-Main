@@ -1,17 +1,16 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { CheckCircle, XCircle, Loader2, Mail } from "lucide-react"
+import { CheckCircle, XCircle, Mail, ArrowLeft } from "lucide-react"
 import { createClient } from "@/lib/supabase/client"
 
 export default function VerifyEmailPage() {
   const [status, setStatus] = useState<"loading" | "success" | "error">("loading")
   const [message, setMessage] = useState("")
-  const router = useRouter()
   const searchParams = useSearchParams()
   const supabase = createClient()
 
@@ -37,12 +36,7 @@ export default function VerifyEmailPage() {
           setMessage(error.message || "Failed to verify email. Please try again.")
         } else {
           setStatus("success")
-          setMessage("Your email has been verified successfully!")
-
-          // Redirect to dashboard after 3 seconds
-          setTimeout(() => {
-            router.push("/dashboard")
-          }, 3000)
+          setMessage("Your email has been successfully verified! You can now sign in to your account.")
         }
       } catch (error) {
         setStatus("error")
@@ -51,18 +45,18 @@ export default function VerifyEmailPage() {
     }
 
     verifyEmail()
-  }, [searchParams, supabase.auth, router])
+  }, [searchParams, supabase.auth])
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
-            {status === "loading" && <Loader2 className="h-6 w-6 animate-spin text-blue-600" />}
-            {status === "success" && <CheckCircle className="h-6 w-6 text-green-600" />}
-            {status === "error" && <XCircle className="h-6 w-6 text-red-600" />}
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full">
+            {status === "loading" && <Mail className="h-8 w-8 text-blue-600 animate-pulse" />}
+            {status === "success" && <CheckCircle className="h-8 w-8 text-green-600" />}
+            {status === "error" && <XCircle className="h-8 w-8 text-red-600" />}
           </div>
-          <CardTitle className="text-2xl font-bold">
+          <CardTitle className="text-2xl">
             {status === "loading" && "Verifying Email..."}
             {status === "success" && "Email Verified!"}
             {status === "error" && "Verification Failed"}
@@ -71,35 +65,28 @@ export default function VerifyEmailPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           {status === "success" && (
-            <div className="text-center space-y-4">
-              <p className="text-sm text-gray-600">You will be redirected to your dashboard in a few seconds.</p>
-              <Link href="/dashboard">
-                <Button className="w-full">Go to Dashboard</Button>
-              </Link>
-            </div>
+            <Link href="/auth/login" className="block">
+              <Button className="w-full">Sign In to Your Account</Button>
+            </Link>
           )}
-
           {status === "error" && (
-            <div className="text-center space-y-4">
-              <Link href="/auth/sign-up">
-                <Button className="w-full">
-                  <Mail className="mr-2 h-4 w-4" />
-                  Try Signing Up Again
-                </Button>
+            <div className="space-y-2">
+              <Link href="/auth/sign-up" className="block">
+                <Button className="w-full">Try Signing Up Again</Button>
               </Link>
-              <Link href="/auth/login">
+              <Link href="/auth/login" className="block">
                 <Button variant="outline" className="w-full bg-transparent">
-                  Back to Login
+                  Back to Sign In
                 </Button>
               </Link>
             </div>
           )}
-
-          {status === "loading" && (
-            <div className="text-center">
-              <p className="text-sm text-gray-600">Please wait while we verify your email address...</p>
-            </div>
-          )}
+          <Link href="/" className="block">
+            <Button variant="ghost" className="w-full">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Home
+            </Button>
+          </Link>
         </CardContent>
       </Card>
     </div>

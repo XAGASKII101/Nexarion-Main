@@ -2,127 +2,135 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Twitter, Linkedin, Github, Mail } from "lucide-react"
+import { Mail, Phone, MapPin, Twitter, Linkedin, Github } from "lucide-react"
 
 export function Footer() {
+  const footerLinks = {
+    product: [
+      { name: "Features", href: "#features" },
+      { name: "Pricing", href: "#pricing" },
+      { name: "Integrations", href: "/integrations" },
+      { name: "API", href: "/api" },
+    ],
+    company: [
+      { name: "About", href: "/about" },
+      { name: "Blog", href: "/blog" },
+      { name: "Careers", href: "/careers" },
+      { name: "Contact", href: "/contact" },
+    ],
+    support: [
+      { name: "Help Center", href: "/help" },
+      { name: "Documentation", href: "/docs" },
+      { name: "Status", href: "/status" },
+      { name: "Community", href: "/community" },
+    ],
+    legal: [
+      { name: "Privacy Policy", href: "/privacy" },
+      { name: "Terms of Service", href: "/terms" },
+      { name: "Cookie Policy", href: "/cookies" },
+      { name: "GDPR", href: "/gdpr" },
+    ],
+  }
+
   return (
-    <footer className="bg-slate-900 border-t border-slate-800">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Brand */}
-          <div className="col-span-1 md:col-span-2">
-            <Link href="/" className="flex items-center space-x-2 mb-4">
-              <Image src="/images/nexarion-logo.png" alt="NexarionAI" width={32} height={32} className="rounded-full" />
-              <span className="text-xl font-bold text-white">NexarionAI</span>
-            </Link>
-            <p className="text-slate-400 mb-6 max-w-md">
-              Transform your customer interactions with intelligent AI automation. Connect all your platforms and let AI
-              handle the conversations.
+    <footer className="bg-gray-900 text-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid lg:grid-cols-5 gap-8">
+          {/* Company Info */}
+          <div className="lg:col-span-2">
+            <div className="flex items-center space-x-2 mb-6">
+              <Image src="/images/nexarion-logo.png" alt="NexarionAI" width={32} height={32} className="h-8 w-8" />
+              <span className="text-xl font-bold">NexarionAI</span>
+            </div>
+            <p className="text-gray-400 mb-6 max-w-md">
+              Transform your customer communication with AI-powered automation across WhatsApp, Instagram, Gmail, and
+              voice interactions.
             </p>
-            <div className="flex space-x-4">
-              <Button variant="ghost" size="sm" className="text-slate-400 hover:text-white">
-                <Twitter className="h-4 w-4" />
-              </Button>
-              <Button variant="ghost" size="sm" className="text-slate-400 hover:text-white">
-                <Linkedin className="h-4 w-4" />
-              </Button>
-              <Button variant="ghost" size="sm" className="text-slate-400 hover:text-white">
-                <Github className="h-4 w-4" />
-              </Button>
-              <Button variant="ghost" size="sm" className="text-slate-400 hover:text-white">
+            <div className="space-y-3 text-gray-400">
+              <div className="flex items-center space-x-3">
                 <Mail className="h-4 w-4" />
-              </Button>
+                <span>hello@nexarion.ai</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Phone className="h-4 w-4" />
+                <span>+1 (555) 123-4567</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <MapPin className="h-4 w-4" />
+                <span>San Francisco, CA</span>
+              </div>
             </div>
           </div>
 
-          {/* Product */}
+          {/* Links */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Product</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="#features" className="text-slate-400 hover:text-white transition-colors">
-                  Features
-                </Link>
-              </li>
-              <li>
-                <Link href="#pricing" className="text-slate-400 hover:text-white transition-colors">
-                  Pricing
-                </Link>
-              </li>
-              <li>
-                <Link href="/integrations" className="text-slate-400 hover:text-white transition-colors">
-                  Integrations
-                </Link>
-              </li>
-              <li>
-                <Link href="/api" className="text-slate-400 hover:text-white transition-colors">
-                  API
-                </Link>
-              </li>
+            <h3 className="font-semibold mb-4">Product</h3>
+            <ul className="space-y-3">
+              {footerLinks.product.map((link) => (
+                <li key={link.name}>
+                  <Link href={link.href} className="text-gray-400 hover:text-white transition-colors">
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Company */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Company</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/about" className="text-slate-400 hover:text-white transition-colors">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" className="text-slate-400 hover:text-white transition-colors">
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link href="/careers" className="text-slate-400 hover:text-white transition-colors">
-                  Careers
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-slate-400 hover:text-white transition-colors">
-                  Contact
-                </Link>
-              </li>
+            <h3 className="font-semibold mb-4">Company</h3>
+            <ul className="space-y-3">
+              {footerLinks.company.map((link) => (
+                <li key={link.name}>
+                  <Link href={link.href} className="text-gray-400 hover:text-white transition-colors">
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="font-semibold mb-4">Support</h3>
+            <ul className="space-y-3">
+              {footerLinks.support.map((link) => (
+                <li key={link.name}>
+                  <Link href={link.href} className="text-gray-400 hover:text-white transition-colors">
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
-        {/* Newsletter */}
-        <div className="border-t border-slate-800 mt-12 pt-8">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="mb-4 md:mb-0">
-              <h3 className="text-white font-semibold mb-2">Stay updated</h3>
-              <p className="text-slate-400">Get the latest news and updates from NexarionAI.</p>
+        <div className="border-t border-gray-800 mt-12 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="flex space-x-6 mb-4 md:mb-0">
+              {footerLinks.legal.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="text-gray-400 hover:text-white transition-colors text-sm"
+                >
+                  {link.name}
+                </Link>
+              ))}
             </div>
-            <div className="flex space-x-2 w-full md:w-auto">
-              <Input
-                type="email"
-                placeholder="Enter your email"
-                className="bg-slate-800 border-slate-700 text-white placeholder-slate-400"
-              />
-              <Button>Subscribe</Button>
-            </div>
-          </div>
-        </div>
 
-        {/* Bottom */}
-        <div className="border-t border-slate-800 mt-8 pt-8 flex flex-col md:flex-row items-center justify-between">
-          <p className="text-slate-400 text-sm">© 2024 NexarionAI. All rights reserved.</p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link href="/privacy" className="text-slate-400 hover:text-white text-sm transition-colors">
-              Privacy Policy
-            </Link>
-            <Link href="/terms" className="text-slate-400 hover:text-white text-sm transition-colors">
-              Terms of Service
-            </Link>
-            <Link href="/cookies" className="text-slate-400 hover:text-white text-sm transition-colors">
-              Cookie Policy
-            </Link>
+            <div className="flex items-center space-x-6">
+              <div className="flex space-x-4">
+                <Link href="#" className="text-gray-400 hover:text-white transition-colors">
+                  <Twitter className="h-5 w-5" />
+                </Link>
+                <Link href="#" className="text-gray-400 hover:text-white transition-colors">
+                  <Linkedin className="h-5 w-5" />
+                </Link>
+                <Link href="#" className="text-gray-400 hover:text-white transition-colors">
+                  <Github className="h-5 w-5" />
+                </Link>
+              </div>
+              <span className="text-gray-400 text-sm">© 2024 NexarionAI. All rights reserved.</span>
+            </div>
           </div>
         </div>
       </div>

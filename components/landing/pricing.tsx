@@ -1,65 +1,60 @@
 "use client"
 
-import { useState } from "react"
-import Link from "next/link"
+import { Check, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Check, Star, Zap, Crown, Rocket } from "lucide-react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import Link from "next/link"
 
 export function Pricing() {
-  const [isAnnual, setIsAnnual] = useState(false)
-
   const plans = [
     {
       name: "Starter",
-      icon: Zap,
-      description: "Perfect for solopreneurs and small creators",
-      monthlyPrice: 49,
-      annualPrice: 39,
+      price: "$49",
+      period: "/month",
+      description: "Perfect for small businesses and solopreneurs",
       features: [
         "1,000 AI responses/month",
-        "Instagram + WhatsApp integration",
-        "Basic voice cloning",
+        "WhatsApp + Instagram integration",
+        "Basic email automation",
+        "Standard voice cloning",
         "Email support",
-        "Analytics dashboard",
-        "7-day free trial",
+        "Basic analytics",
       ],
       popular: false,
       cta: "Start Free Trial",
     },
     {
       name: "Professional",
-      icon: Crown,
-      description: "For growing businesses and agencies",
-      monthlyPrice: 149,
-      annualPrice: 119,
+      price: "$149",
+      period: "/month",
+      description: "Ideal for growing businesses and agencies",
       features: [
         "10,000 AI responses/month",
         "All platform integrations",
-        "Advanced voice cloning",
+        "Advanced email workflows",
+        "Premium voice cloning",
         "Priority support",
         "Advanced analytics",
-        "Custom AI training",
+        "Custom integrations",
         "Team collaboration",
-        "API access",
       ],
       popular: true,
       cta: "Start Free Trial",
     },
     {
       name: "Enterprise",
-      icon: Rocket,
-      description: "For large teams and enterprises",
-      monthlyPrice: 499,
-      annualPrice: 399,
+      price: "Custom",
+      period: "",
+      description: "For large organizations with custom needs",
       features: [
         "Unlimited AI responses",
         "White-label solution",
-        "Custom integrations",
+        "Custom AI training",
         "Dedicated account manager",
-        "Custom voice models",
-        "Advanced security",
+        "24/7 phone support",
+        "Custom integrations",
         "SLA guarantee",
-        "Custom onboarding",
+        "On-premise deployment",
       ],
       popular: false,
       cta: "Contact Sales",
@@ -67,152 +62,72 @@ export function Pricing() {
   ]
 
   return (
-    <section id="pricing" className="py-20 bg-slate-900">
+    <section id="pricing" className="py-20 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-            Simple, Transparent
-            <span className="bg-gradient-to-r from-cyan-400 to-pink-400 bg-clip-text text-transparent"> Pricing</span>
-          </h2>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto mb-8">
-            Choose the perfect plan for your business. All plans include a 7-day free trial.
+          <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl mb-4">Simple, Transparent Pricing</h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+            Start with a 7-day free trial. No credit card required. Cancel anytime.
           </p>
-
-          {/* Billing Toggle */}
-          <div className="flex items-center justify-center space-x-4 mb-12">
-            <span className={`text-sm ${!isAnnual ? "text-white" : "text-slate-400"}`}>Monthly</span>
-            <button
-              onClick={() => setIsAnnual(!isAnnual)}
-              className={`relative w-14 h-7 rounded-full transition-colors ${
-                isAnnual ? "bg-gradient-to-r from-cyan-500 to-pink-500" : "bg-slate-600"
-              }`}
-            >
-              <div
-                className={`absolute w-5 h-5 bg-white rounded-full top-1 transition-transform ${
-                  isAnnual ? "translate-x-8" : "translate-x-1"
-                }`}
-              />
-            </button>
-            <span className={`text-sm ${isAnnual ? "text-white" : "text-slate-400"}`}>
-              Annual
-              <span className="ml-2 bg-green-500/20 text-green-400 px-2 py-1 rounded-full text-xs">Save 20%</span>
-            </span>
+          <div className="inline-flex items-center space-x-2 bg-green-50 text-green-700 px-4 py-2 rounded-full">
+            <Star className="h-4 w-4 fill-current" />
+            <span className="text-sm font-medium">Save 20% with annual billing</span>
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {plans.map((plan, index) => (
-            <div
+            <Card
               key={index}
-              className={`relative bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border transition-all duration-300 hover:transform hover:scale-105 ${
-                plan.popular
-                  ? "border-cyan-500/50 shadow-2xl shadow-cyan-500/20"
-                  : "border-slate-700/50 hover:border-slate-600/50"
-              }`}
+              className={`relative ${plan.popular ? "border-blue-500 shadow-xl scale-105" : "border-gray-200"}`}
             >
-              {/* Popular Badge */}
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <div className="bg-gradient-to-r from-cyan-500 to-pink-500 text-white px-4 py-2 rounded-full text-sm font-semibold flex items-center space-x-1">
-                    <Star className="w-4 h-4" />
-                    <span>Most Popular</span>
-                  </div>
+                  <span className="bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-medium">
+                    Most Popular
+                  </span>
                 </div>
               )}
 
-              {/* Plan Header */}
-              <div className="text-center mb-8">
-                <div
-                  className={`w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center ${
-                    plan.popular ? "bg-gradient-to-r from-cyan-500 to-pink-500" : "bg-slate-700/50"
-                  }`}
-                >
-                  <plan.icon className="w-8 h-8 text-white" />
+              <CardHeader className="text-center pb-8">
+                <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
+                <CardDescription className="text-gray-600 mt-2">{plan.description}</CardDescription>
+                <div className="mt-6">
+                  <span className="text-4xl font-bold text-gray-900">{plan.price}</span>
+                  <span className="text-gray-600">{plan.period}</span>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
-                <p className="text-slate-400 text-sm mb-6">{plan.description}</p>
+              </CardHeader>
 
-                {/* Price */}
-                <div className="mb-6">
-                  <div className="flex items-baseline justify-center space-x-2">
-                    <span className="text-4xl font-bold text-white">
-                      ${isAnnual ? plan.annualPrice : plan.monthlyPrice}
-                    </span>
-                    <span className="text-slate-400">/month</span>
-                  </div>
-                  {isAnnual && (
-                    <div className="text-sm text-green-400 mt-1">
-                      Save ${(plan.monthlyPrice - plan.annualPrice) * 12}/year
-                    </div>
-                  )}
-                </div>
-              </div>
+              <CardContent className="space-y-6">
+                <ul className="space-y-3">
+                  {plan.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="flex items-start space-x-3">
+                      <Check className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-700">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
 
-              {/* Features */}
-              <div className="space-y-4 mb-8">
-                {plan.features.map((feature, featureIndex) => (
-                  <div key={featureIndex} className="flex items-center space-x-3">
-                    <div
-                      className={`w-5 h-5 rounded-full flex items-center justify-center ${
-                        plan.popular ? "bg-cyan-500/20" : "bg-slate-700/50"
-                      }`}
-                    >
-                      <Check className={`w-3 h-3 ${plan.popular ? "text-cyan-400" : "text-slate-400"}`} />
-                    </div>
-                    <span className="text-slate-300 text-sm">{feature}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* CTA Button */}
-              <Link href="/auth/sign-up" className="block">
-                <Button
-                  className={`w-full py-3 font-semibold transition-all duration-300 ${
-                    plan.popular
-                      ? "bg-gradient-to-r from-cyan-500 to-pink-500 hover:from-cyan-600 hover:to-pink-600 text-white"
-                      : "bg-slate-700 hover:bg-slate-600 text-white"
-                  }`}
-                >
-                  {plan.cta}
-                </Button>
-              </Link>
-            </div>
+                <Link href="/auth/sign-up" className="block">
+                  <Button
+                    className={`w-full ${plan.popular ? "bg-blue-600 hover:bg-blue-700" : ""}`}
+                    variant={plan.popular ? "default" : "outline"}
+                  >
+                    {plan.cta}
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
           ))}
         </div>
 
-        {/* FAQ Section */}
-        <div className="mt-20 max-w-4xl mx-auto">
-          <h3 className="text-2xl font-bold text-white text-center mb-12">Frequently Asked Questions</h3>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="space-y-6">
-              <div>
-                <h4 className="text-lg font-semibold text-white mb-2">Can I change plans anytime?</h4>
-                <p className="text-slate-400 text-sm">
-                  Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately.
-                </p>
-              </div>
-              <div>
-                <h4 className="text-lg font-semibold text-white mb-2">What happens after the free trial?</h4>
-                <p className="text-slate-400 text-sm">
-                  Your trial automatically converts to the plan you selected. Cancel anytime during the trial with no
-                  charges.
-                </p>
-              </div>
-            </div>
-            <div className="space-y-6">
-              <div>
-                <h4 className="text-lg font-semibold text-white mb-2">Do you offer refunds?</h4>
-                <p className="text-slate-400 text-sm">
-                  Yes, we offer a 30-day money-back guarantee if you're not completely satisfied.
-                </p>
-              </div>
-              <div>
-                <h4 className="text-lg font-semibold text-white mb-2">Is there a setup fee?</h4>
-                <p className="text-slate-400 text-sm">
-                  No setup fees, no hidden costs. The price you see is exactly what you pay.
-                </p>
-              </div>
-            </div>
+        <div className="text-center mt-12">
+          <p className="text-gray-600 mb-4">All plans include:</p>
+          <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-600">
+            <span>✓ 7-day free trial</span>
+            <span>✓ No setup fees</span>
+            <span>✓ Cancel anytime</span>
+            <span>✓ 99.9% uptime SLA</span>
           </div>
         </div>
       </div>

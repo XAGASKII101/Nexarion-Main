@@ -2,84 +2,49 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Clock, Users, TrendingUp } from "lucide-react"
+import { ArrowRight, Zap } from "lucide-react"
 
 export function CTA() {
   return (
-    <section className="py-20 bg-gradient-to-r from-cyan-900 via-slate-900 to-pink-900">
+    <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Urgency Badge */}
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-red-500/20 to-orange-500/20 border border-red-500/30 mb-8">
-            <Clock className="w-4 h-4 text-red-400 mr-2" />
-            <span className="text-sm text-red-300">Limited Time: 7-Day Free Trial</span>
+        <div className="text-center max-w-4xl mx-auto">
+          <div className="mb-8">
+            <Zap className="h-16 w-16 text-white mx-auto mb-6 animate-pulse" />
           </div>
 
-          {/* Main Headline */}
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-            Ready to
-            <span className="bg-gradient-to-r from-cyan-400 to-pink-400 bg-clip-text text-transparent"> 10X </span>
-            Your Business?
+          <h2 className="text-3xl font-bold text-white sm:text-4xl mb-6">
+            Ready to Transform Your Customer Communication?
           </h2>
 
-          {/* Subtitle */}
-          <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed">
-            Join thousands of entrepreneurs who are already using AI to automate their customer conversations and scale
-            their revenue on autopilot.
+          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+            Join thousands of businesses already using NexarionAI to automate their customer interactions. Start your
+            free trial today - no credit card required.
           </p>
 
-          {/* Benefits */}
-          <div className="grid md:grid-cols-3 gap-6 mb-12 max-w-3xl mx-auto">
-            <div className="flex items-center justify-center space-x-2 text-slate-300">
-              <Users className="w-5 h-5 text-cyan-400" />
-              <span className="text-sm">5,000+ Happy Customers</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2 text-slate-300">
-              <TrendingUp className="w-5 h-5 text-green-400" />
-              <span className="text-sm">300% Avg. Revenue Increase</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2 text-slate-300">
-              <Clock className="w-5 h-5 text-purple-400" />
-              <span className="text-sm">Setup in Under 5 Minutes</span>
-            </div>
-          </div>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-8">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
             <Link href="/auth/sign-up">
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-cyan-500 to-pink-500 hover:from-cyan-600 hover:to-pink-600 text-white px-12 py-4 text-xl font-bold rounded-xl shadow-2xl hover:shadow-cyan-500/25 transition-all duration-300 animate-glow"
-              >
+              <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100 group">
                 Start Your Free Trial
-                <ArrowRight className="w-6 h-6 ml-2" />
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
-
-            <div className="text-center">
-              <div className="text-sm text-slate-400 mb-1">No Credit Card Required</div>
-              <div className="text-sm text-slate-400">Cancel Anytime</div>
-            </div>
+            <Link href="#pricing">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-white text-white hover:bg-white hover:text-blue-600 bg-transparent"
+              >
+                View Pricing
+              </Button>
+            </Link>
           </div>
 
-          {/* Risk Reversal */}
-          <div className="bg-slate-800/30 backdrop-blur-sm rounded-2xl p-6 border border-slate-700/50 max-w-2xl mx-auto">
-            <h3 className="text-lg font-semibold text-white mb-3">🛡️ 100% Risk-Free Guarantee</h3>
-            <p className="text-slate-300 text-sm leading-relaxed">
-              Try NexarionAI for 7 days completely free. If you're not amazed by the results, we'll refund every penny
-              within 30 days. No questions asked.
-            </p>
-          </div>
-
-          {/* Social Proof */}
-          <div className="mt-12 text-center">
-            <p className="text-slate-400 text-sm mb-4">Trusted by entrepreneurs worldwide</p>
-            <div className="flex justify-center items-center space-x-8 opacity-60">
-              <div className="text-slate-500 font-semibold">TechCrunch</div>
-              <div className="text-slate-500 font-semibold">Forbes</div>
-              <div className="text-slate-500 font-semibold">Entrepreneur</div>
-              <div className="text-slate-500 font-semibold">Inc.</div>
-            </div>
+          <div className="flex flex-wrap justify-center gap-8 text-blue-100 text-sm">
+            <span>✓ 7-day free trial</span>
+            <span>✓ No credit card required</span>
+            <span>✓ Setup in under 10 minutes</span>
+            <span>✓ Cancel anytime</span>
           </div>
         </div>
       </div>
