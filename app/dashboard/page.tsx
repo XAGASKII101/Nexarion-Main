@@ -1,18 +1,28 @@
-import { createClient } from "@/lib/supabase/server"
-import { redirect } from "next/navigation"
-import { Header } from "@/components/dashboard/header"
-import { StatsCard } from "@/components/dashboard/stats-card"
-import { MessageSquare, Users, TrendingUp, Zap } from "lucide-react"
+import { createClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
+import { Header } from "@/components/dashboard/header";
+import { StatsCard } from "@/components/dashboard/stats-card";
+import { MessageSquare, Users, TrendingUp, Zap } from "lucide-react";
+
+export const runtime = 'nodejs'; // Ensure Node.js runtime for Supabase
 
 export default async function DashboardPage() {
-  const supabase = createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  const supabase = createClient();
 
-  if (!user) {
-    redirect("/auth/login")
+  // Check if supabase client is initialized
+  if (!supabase) {
+    console.error("Supabase client failed to initialize");
+    redirect("/auth/login");
   }
+
+  const { data, error } = await supabase.auth.getUser();
+
+  if (error || !data?.user) {
+    console.error("Error fetching user:", error?.message || "No user found");
+    redirect("/auth/login");
+  }
+
+  const user = data.user;
 
   return (
     <div className="flex-1 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
@@ -32,5 +42,5 @@ export default async function DashboardPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
