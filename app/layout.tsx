@@ -3,27 +3,13 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { Toaster } from "@/components/ui/toaster"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "NexarionAI - AI-Powered Business Automation",
+  title: "NexarionAI - AI-Powered Social Media Automation",
   description:
-    "Transform your business with intelligent automation. Connect WhatsApp, Instagram, Gmail, and more with AI-powered responses and workflows.",
-  keywords: ["AI automation", "business automation", "WhatsApp automation", "Instagram automation", "Gmail automation"],
-  authors: [{ name: "NexarionAI Team" }],
-  openGraph: {
-    title: "NexarionAI - AI-Powered Business Automation",
-    description: "Transform your business with intelligent automation",
-    type: "website",
-    url: "https://nexarion.ai",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "NexarionAI - AI-Powered Business Automation",
-    description: "Transform your business with intelligent automation",
-  },
+    "Automate your Instagram, WhatsApp, and Gmail with AI. Clone your voice, create smart responses, and never miss a lead again.",
     generator: 'v0.app'
 }
 
@@ -35,9 +21,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           {children}
-          <Toaster />
         </ThemeProvider>
       </body>
     </html>

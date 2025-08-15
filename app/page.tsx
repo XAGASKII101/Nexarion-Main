@@ -1,23 +1,21 @@
-import { Header } from "@/components/landing/header"
-import { EnhancedHero } from "@/components/landing/enhanced-hero"
-import { SocialProof } from "@/components/landing/social-proof"
-import { ProblemSolution } from "@/components/landing/problem-solution"
-import { EnhancedFeatures } from "@/components/landing/enhanced-features"
-import { HowItWorks } from "@/components/landing/how-it-works"
-import { Pricing } from "@/components/landing/pricing"
-import { Testimonials } from "@/components/landing/testimonials"
-import { CTA } from "@/components/landing/cta"
-import { Footer } from "@/components/landing/footer"
+import Header from "@/components/landing/header"
+import Hero from "@/components/landing/hero"
+import ProblemSolution from "@/components/landing/problem-solution"
+import Features from "@/components/landing/features"
+import HowItWorks from "@/components/landing/how-it-works"
+import Pricing from "@/components/landing/pricing"
+import Testimonials from "@/components/landing/testimonials"
+import CTA from "@/components/landing/cta"
+import Footer from "@/components/landing/footer"
 
-export default function HomePage() {
+export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+    <div className="min-h-screen bg-background">
       <Header />
       <main>
-        <EnhancedHero />
-        <SocialProof />
+        <Hero />
         <ProblemSolution />
-        <EnhancedFeatures />
+        <Features />
         <HowItWorks />
         <Pricing />
         <Testimonials />

@@ -1,97 +1,59 @@
-"use client"
-
-import { Star, Quote } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
-export function Testimonials() {
+export default function Testimonials() {
   const testimonials = [
     {
       name: "Sarah Johnson",
-      role: "E-commerce Owner",
-      company: "StyleHub",
-      content:
-        "NexarionAI transformed our customer service. We went from 12-hour response times to instant replies. Our customer satisfaction scores increased by 40%!",
-      rating: 5,
+      role: "Content Creator",
       avatar: "/placeholder-user.jpg",
+      content:
+        "NexarionAI has completely transformed how I manage my Instagram. I never miss a DM and my engagement has increased by 300%!",
     },
     {
-      name: "Michael Chen",
-      role: "Marketing Director",
-      company: "TechStart",
-      content:
-        "The WhatsApp automation alone saved us 20 hours per week. The AI responses are so natural that customers can't tell the difference.",
-      rating: 5,
+      name: "Mike Chen",
+      role: "E-commerce Owner",
       avatar: "/placeholder-user.jpg",
+      content:
+        "The WhatsApp automation is incredible. My customers get instant responses even when I'm sleeping. Sales have doubled!",
     },
     {
       name: "Emily Rodriguez",
-      role: "Small Business Owner",
-      company: "Local Bakery",
-      content:
-        "As a small business, I can't afford to hire customer service staff. NexarionAI handles all my Instagram and WhatsApp messages perfectly.",
-      rating: 5,
+      role: "Digital Marketer",
       avatar: "/placeholder-user.jpg",
-    },
-    {
-      name: "David Thompson",
-      role: "Agency Founder",
-      company: "Growth Agency",
       content:
-        "We use NexarionAI for all our clients. The voice cloning feature is incredible - it maintains the personal touch while scaling infinitely.",
-      rating: 5,
-      avatar: "/placeholder-user.jpg",
-    },
-    {
-      name: "Lisa Wang",
-      role: "Consultant",
-      company: "Business Solutions",
-      content:
-        "The analytics dashboard gives me insights I never had before. I can see exactly how AI is improving my business metrics.",
-      rating: 5,
-      avatar: "/placeholder-user.jpg",
-    },
-    {
-      name: "James Miller",
-      role: "Startup Founder",
-      company: "InnovateCo",
-      content:
-        "Setup took less than 10 minutes. Within an hour, our AI was handling customer inquiries like a seasoned professional.",
-      rating: 5,
-      avatar: "/placeholder-user.jpg",
+        "The voice cloning feature is mind-blowing. My clients think I'm personally responding to every message. Game changer!",
     },
   ]
 
   return (
-    <section id="testimonials" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="testimonials" className="py-20 px-4 bg-muted/50">
+      <div className="container mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl mb-4">Loved by Thousands of Businesses</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            See how NexarionAI is transforming customer communication for businesses of all sizes.
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">What Our Users Say</h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            Join thousands of creators and businesses who are already automating their success.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <Card key={index} className="border-2">
               <CardContent className="p-6">
-                <div className="flex items-center mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-
-                <Quote className="h-8 w-8 text-gray-300 mb-4" />
-
-                <p className="text-gray-700 mb-6 leading-relaxed">"{testimonial.content}"</p>
-
+                <p className="text-lg mb-6 italic">"{testimonial.content}"</p>
                 <div className="flex items-center">
-                  <div className="w-10 h-10 bg-gray-200 rounded-full mr-3"></div>
+                  <Avatar className="mr-4">
+                    <AvatarImage src={testimonial.avatar || "/placeholder.svg"} alt={testimonial.name} />
+                    <AvatarFallback>
+                      {testimonial.name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")}
+                    </AvatarFallback>
+                  </Avatar>
                   <div>
-                    <div className="font-semibold text-gray-900">{testimonial.name}</div>
-                    <div className="text-sm text-gray-600">
-                      {testimonial.role}, {testimonial.company}
-                    </div>
+                    <p className="font-semibold">{testimonial.name}</p>
+                    <p className="text-muted-foreground">{testimonial.role}</p>
                   </div>
                 </div>
               </CardContent>
